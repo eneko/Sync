@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		957B4FF61C7FB05300745864 /* Sync.h in Headers */ = {isa = PBXBuildFile; fileRef = 957B4FF51C7FB05300745864 /* Sync.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		957B4FFD1C7FB05300745864 /* Sync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957B4FF21C7FB05300745864 /* Sync.framework */; };
-		957B50021C7FB05300745864 /* SyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B50011C7FB05300745864 /* SyncTests.swift */; };
+		957B500F1C7FB08D00745864 /* SyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B500E1C7FB08D00745864 /* SyncTests.swift */; };
+		957B50111C7FB0A500745864 /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B50101C7FB0A500745864 /* Sync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +28,9 @@
 		957B4FF51C7FB05300745864 /* Sync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sync.h; sourceTree = "<group>"; };
 		957B4FF71C7FB05300745864 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957B4FFC1C7FB05300745864 /* SyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		957B50011C7FB05300745864 /* SyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncTests.swift; sourceTree = "<group>"; };
 		957B50031C7FB05300745864 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		957B500E1C7FB08D00745864 /* SyncTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncTests.swift; path = Tests/SyncTests.swift; sourceTree = "<group>"; };
+		957B50101C7FB0A500745864 /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sync.swift; path = Sources/Sync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,8 @@
 		957B4FE81C7FB05300745864 = {
 			isa = PBXGroup;
 			children = (
+				957B500D1C7FB06700745864 /* Tests */,
+				957B500C1C7FB05C00745864 /* Sources */,
 				957B4FF41C7FB05300745864 /* Sync */,
 				957B50001C7FB05300745864 /* SyncTests */,
 				957B4FF31C7FB05300745864 /* Products */,
@@ -80,10 +84,25 @@
 		957B50001C7FB05300745864 /* SyncTests */ = {
 			isa = PBXGroup;
 			children = (
-				957B50011C7FB05300745864 /* SyncTests.swift */,
 				957B50031C7FB05300745864 /* Info.plist */,
 			);
 			path = SyncTests;
+			sourceTree = "<group>";
+		};
+		957B500C1C7FB05C00745864 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				957B50101C7FB0A500745864 /* Sync.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		957B500D1C7FB06700745864 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				957B500E1C7FB08D00745864 /* SyncTests.swift */,
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				957B50111C7FB0A500745864 /* Sync.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				957B50021C7FB05300745864 /* SyncTests.swift in Sources */,
+				957B500F1C7FB08D00745864 /* SyncTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +328,7 @@
 		957B50071C7FB05300745864 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +339,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.enekoalonso.Sync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		957B50081C7FB05300745864 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
