@@ -18,7 +18,7 @@ public struct Sync {
         dispatch_semaphore_signal(semaphore)
     }
 
-    public func wait(timeout: NSTimeInterval = 0) {
+    public func wait(seconds timeout: NSTimeInterval = 0) {
         let start = NSDate()
         while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) != 0 {
             let intervalDate = NSDate(timeIntervalSinceNow: 0.01) // 10 msec

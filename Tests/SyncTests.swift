@@ -8,6 +8,7 @@
 
 import XCTest
 import Sync
+import CoreLocation
 
 class SyncTests: XCTestCase {
     
@@ -42,6 +43,23 @@ class SyncTests: XCTestCase {
         XCTAssertEqual(++count, 1)
         sync.wait()
         XCTAssertEqual(++count, 3)
+    }
+
+    func testCoreLocation() {
+        let location = locationForString("San Francisco")
+        XCTAssertEqual(Int(location?.coordinate.latitude ?? 0), 37)
+        XCTAssertEqual(Int(location?.coordinate.longitude ?? 0), -122)
+    }
+
+    func locationForString(name: String) -> CLLocation? {
+        var location: CLLocation?
+        let sync = Sync()
+        CLGeocoder().geocodeAddressString(name) { (placemarks, error) in
+            location = placemarks?.first?.location
+            sync.complete()
+        }
+        sync.wait(seconds: 5)
+        return location
     }
 
 }
