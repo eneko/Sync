@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eneko Alonso. All rights reserved.
 //
 
-public struct Sync {
+public struct SyncBlock {
 
     private let semaphore: dispatch_semaphore_t
 
@@ -23,6 +23,7 @@ public struct Sync {
         while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) != 0 {
             let intervalDate = NSDate(timeIntervalSinceNow: 0.01) // 10 msec
             NSRunLoop.currentRunLoop().runUntilDate(intervalDate)
+//            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: intervalDate)
             if timeout > 0 && NSDate().timeIntervalSinceDate(start) > timeout {
                 break
             }

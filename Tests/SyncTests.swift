@@ -13,7 +13,7 @@ import CoreLocation
 class SyncTests: XCTestCase {
     
     func testWithoutBlock() {
-        let sync = Sync()
+        let sync = SyncBlock()
         sync.complete()
         sync.wait()
         XCTAssertTrue(true)
@@ -21,7 +21,7 @@ class SyncTests: XCTestCase {
 
     func testAsyncBlockMainThread() {
         var count = 0
-        let sync = Sync()
+        let sync = SyncBlock()
         XCTAssertEqual(count, 0)
         dispatch_async(dispatch_get_main_queue()) {
             XCTAssertEqual(++count, 2)
@@ -34,7 +34,7 @@ class SyncTests: XCTestCase {
 
     func testAsyncBlockBackgroundThread() {
         var count = 0
-        let sync = Sync()
+        let sync = SyncBlock()
         XCTAssertEqual(count, 0)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             XCTAssertEqual(++count, 2)
@@ -53,7 +53,7 @@ class SyncTests: XCTestCase {
 
     func locationForString(name: String) -> CLLocation? {
         var location: CLLocation?
-        let sync = Sync()
+        let sync = SyncBlock()
         CLGeocoder().geocodeAddressString(name) { (placemarks, error) in
             location = placemarks?.first?.location
             sync.complete()
