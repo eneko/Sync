@@ -8,23 +8,23 @@
 
 public struct SyncBlock {
 
-    private let semaphore: dispatch_semaphore_t
+    fileprivate let semaphore: DispatchSemaphore
 
     public init() {
-        semaphore = dispatch_semaphore_create(0)
+        semaphore = DispatchSemaphore(value: 0)
     }
 
     public func complete() {
-        dispatch_semaphore_signal(semaphore)
+        semaphore.signal()
     }
 
-    public func wait(seconds timeout: NSTimeInterval = 0) {
-        let start = NSDate()
-        while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) != 0 {
-            let intervalDate = NSDate(timeIntervalSinceNow: 0.01) // 10 msec
-            NSRunLoop.currentRunLoop().runUntilDate(intervalDate)
+    public func wait(seconds timeout: TimeInterval = 0) {
+        let start = Date()
+        while semaphore.wait(timeout: DispatchTime.now()) == .timedOut {
+            let intervalDate = Date(timeIntervalSinceNow: 0.01) // 10 msec
+            RunLoop.current.run(until: intervalDate)
 //            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: intervalDate)
-            if timeout > 0 && NSDate().timeIntervalSinceDate(start) > timeout {
+            if timeout > 0 && Date().timeIntervalSince(start) > timeout {
                 break
             }
         }

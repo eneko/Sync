@@ -23,7 +23,7 @@ class SyncTests: XCTestCase {
         var count = 0
         let sync = SyncBlock()
         XCTAssertEqual(count, 0)
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             XCTAssertEqual(++count, 2)
             sync.complete()
         }
@@ -36,7 +36,7 @@ class SyncTests: XCTestCase {
         var count = 0
         let sync = SyncBlock()
         XCTAssertEqual(count, 0)
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             XCTAssertEqual(++count, 2)
             sync.complete()
         }
@@ -51,7 +51,7 @@ class SyncTests: XCTestCase {
         XCTAssertEqual(Int(location?.coordinate.longitude ?? 0), -122)
     }
 
-    func locationForString(name: String) -> CLLocation? {
+    func locationForString(_ name: String) -> CLLocation? {
         var location: CLLocation?
         let sync = SyncBlock()
         CLGeocoder().geocodeAddressString(name) { (placemarks, error) in
